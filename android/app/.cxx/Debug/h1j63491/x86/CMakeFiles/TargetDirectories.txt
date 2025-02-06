@@ -1,0 +1,2 @@
+/Users/tavu3/StudioProjects/flutter_base_getx/android/app/.cxx/Debug/h1j63491/x86/CMakeFiles/edit_cache.dir
+/Users/tavu3/StudioProjects/flutter_base_getx/android/app/.cxx/Debug/h1j63491/x86/CMakeFiles/rebuild_cache.dir
