@@ -1,0 +1,63 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "notification-dev-152b8",
+          "appId": "1:671568280385:android:b9ae9e9aa5145b238c7fc0",
+          "fileOutput": "android/app/google-services.json"
+        },
+        "buildConfigurations": {
+          "src/dev": {
+            "projectId": "notification-dev-152b8",
+            "appId": "1:671568280385:android:f3901b9ac686db6c8c7fc0",
+            "fileOutput": "android/app/src/dev/google-services.json"
+          },
+          "src/prod": {
+            "projectId": "notification-c5f92",
+            "appId": "1:953318706997:android:7223fe3ce236ccde9f867c",
+            "fileOutput": "android/app/src/prod/google-services.json"
+          }
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "notification-dev-152b8",
+          "appId": "1:671568280385:ios:6fddd2e4311318288c7fc0",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        },
+        "buildConfigurations": {
+          "Debug-dev": {
+            "projectId": "notification-dev-152b8",
+            "appId": "1:671568280385:ios:3822adbe35b87cf28c7fc0",
+            "uploadDebugSymbols": false,
+            "fileOutput": "ios/flavors/dev/GoogleService-Info.plist"
+          },
+          "Debug-prod": {
+            "projectId": "notification-c5f92",
+            "appId": "1:953318706997:ios:3eed68c0b73d37ad9f867c",
+            "uploadDebugSymbols": false,
+            "fileOutput": "ios/flavors/prod/GoogleService-Info.plist"
+          }
+        }
+      },
+      "dart": {
+        "lib/firebase_options_prod.dart": {
+          "projectId": "notification-c5f92",
+          "configurations": {
+            "android": "1:953318706997:android:7223fe3ce236ccde9f867c",
+            "ios": "1:953318706997:ios:3eed68c0b73d37ad9f867c"
+          }
+        },
+        "lib/firebase_options_dev.dart": {
+          "projectId": "notification-dev-152b8",
+          "configurations": {
+            "android": "1:671568280385:android:b9ae9e9aa5145b238c7fc0",
+            "ios": "1:671568280385:ios:6fddd2e4311318288c7fc0"
+          }
+        }
+      }
+    }
+  }
+}
