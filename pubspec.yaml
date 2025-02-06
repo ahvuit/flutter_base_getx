@@ -1,6 +1,6 @@
 name: flutter_base_getx
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -18,14 +18,15 @@ dependencies:
   intl: ^0.19.0
 
   # Dio for network requests
-  dio: 5.7.0
+  dio: ^5.7.0
   retrofit: ^4.4.2
 
   # Curl logger for Dio
-  curl_logger_dio_interceptor: ^1.0.0
   pretty_dio_logger: ^1.4.0
+  curl_logger_dio_interceptor: ^1.0.0
+  http_certificate_pinning: ^3.0.0
 
-  # Http parser for parsing http requests
+  # Http parser
   http_parser: ^4.1.2
 
   # Helpers for JSON models
@@ -40,7 +41,10 @@ dependencies:
   # Generate files
   flutter_gen: ^5.9.0
 
-  # GetX package for state management
+  # SVG support
+  flutter_svg: ^2.0.6
+
+  # GetX for state management
   get: ^4.6.6
   get_storage: ^2.1.1
 
@@ -62,7 +66,7 @@ dependencies:
   # Google Fonts
   google_fonts: ^6.2.1
 
-  # Shimmer effect for loading indicators
+  # Shimmer effect
   shimmer: ^3.0.0
 
   # Image caching
@@ -72,13 +76,13 @@ dependencies:
   # Sentry for error tracking
   sentry_flutter: ^8.13.0
 
-  # Connectivity for network status
+  # Connectivity
   connectivity_plus: ^6.1.2
 
-  # Splash screen configuration
+  # Splash screen
   flutter_native_splash: ^2.4.4
 
-  # Jailbreak
+  # Jailbreak detection
   flutter_jailbreak_detection: ^1.10.0
 
   # Reactive streams
@@ -88,6 +92,28 @@ dependencies:
   # Dependency injection
   get_it: ^8.0.3
 
+  # Storage
+  shared_preferences: ^2.0.15
+  flutter_secure_storage: ^8.0.0
+
+  # Permission handling
+  permission_handler: ^11.0.0
+
+  # Path provider
+  path_provider: ^2.0.11
+
+  # UUID generation
+  uuid: ^4.5.1
+
+  # Encryption
+  encrypt: ^5.0.1
+
+  # Image picker
+  image_picker: ^1.0.0
+
+  # Logger
+  logger: ^2.0.2+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -95,6 +121,7 @@ dev_dependencies:
   flutter_gen_runner: ^5.9.0
   build_runner: ^2.4.14
   retrofit_generator: ^9.1.7
+  json_serializable: ^6.6.1
 
 flutter:
   uses-material-design: true
@@ -106,13 +133,12 @@ flutter:
     - assets/svgs/
 #Flutter gen - image widget gen
 flutter_gen:
-  output: lib/gen/ # Optional (default: lib/gen/)
-  lineLength: 80 # Optional (default: 80)
-
-  # Optional
+  output: lib/gen/
+  line_length: 80
   integrations:
     flutter_svg: true
     flare_flutter: true
+
 flutter_intl:
   enabled: true
   class_name: AppLocalizations
