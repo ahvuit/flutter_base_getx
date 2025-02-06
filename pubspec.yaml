@@ -1,0 +1,121 @@
+name: flutter_base_getx
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Multi language
+  intl: ^0.19.0
+
+  # Dio for network requests
+  dio: 5.7.0
+  retrofit: ^4.4.2
+
+  # Curl logger for Dio
+  curl_logger_dio_interceptor: ^1.0.0
+  pretty_dio_logger: ^1.4.0
+
+  # Http parser for parsing http requests
+  http_parser: ^4.1.2
+
+  # Helpers for JSON models
+  freezed: ^2.5.8
+  freezed_annotation: ^2.4.4
+  json_serializable: ^6.9.3
+  json_annotation: ^4.9.0
+
+  # Functional programming
+  dartz: ^0.10.1
+
+  # Generate files
+  flutter_gen: ^5.9.0
+
+  # GetX package for state management
+  get: ^4.6.6
+  get_storage: ^2.1.1
+
+  # ScreenUtil for responsive
+  flutter_screenutil: ^5.9.3
+
+  # Notifications
+  flutter_local_notifications: ^18.0.1
+  firebase_messaging: ^15.2.2
+  firebase_core: ^3.11.0
+  firebase_messaging_platform_interface: ^4.6.2
+  firebase_crashlytics: ^4.3.2
+
+  # Device info
+  device_info_plus: ^11.2.2
+  android_id: ^0.4.0
+  package_info_plus: ^8.2.0
+
+  # Google Fonts
+  google_fonts: ^6.2.1
+
+  # Shimmer effect for loading indicators
+  shimmer: ^3.0.0
+
+  # Image caching
+  flutter_blurhash: ^0.8.2
+  cached_network_image: ^3.4.1
+
+  # Sentry for error tracking
+  sentry_flutter: ^8.13.0
+
+  # Connectivity for network status
+  connectivity_plus: ^6.1.2
+
+  # Splash screen configuration
+  flutter_native_splash: ^2.4.4
+
+  # Jailbreak
+  flutter_jailbreak_detection: ^1.10.0
+
+  # Reactive streams
+  rxdart: ^0.28.0
+  collection: ^1.19.0
+
+  # Dependency injection
+  get_it: ^8.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_gen_runner: ^5.9.0
+  build_runner: ^2.4.14
+  retrofit_generator: ^9.1.7
+
+flutter:
+  uses-material-design: true
+  generate: true
+  # Assets
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/svgs/
+#Flutter gen - image widget gen
+flutter_gen:
+  output: lib/gen/ # Optional (default: lib/gen/)
+  lineLength: 80 # Optional (default: 80)
+
+  # Optional
+  integrations:
+    flutter_svg: true
+    flare_flutter: true
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations
+  main_locale: en
+  arb_dir: lib/l10n
+  output_dir: lib/l10n/gen
