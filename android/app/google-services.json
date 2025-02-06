@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "943803076334",
-    "project_id": "flutter-base-getx-18cb0",
-    "storage_bucket": "flutter-base-getx-18cb0.firebasestorage.app"
+    "project_number": "953318706997",
+    "project_id": "notification-c5f92",
+    "storage_bucket": "notification-c5f92.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:943803076334:android:8b980c91a9be51b72e2dff",
+        "mobilesdk_app_id": "1:953318706997:android:7223fe3ce236ccde9f867c",
         "android_client_info": {
           "package_name": "com.ahvuit.flutter_base_getx"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD450SePw6G7GdTq7BaQ7ufYY84a7rjYig"
+          "current_key": "AIzaSyAsPjkFFuqBRvcpqDRJMN1xttcXusBmFiE"
         }
       ],
       "services": {

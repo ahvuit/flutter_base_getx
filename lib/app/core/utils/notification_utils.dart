@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_base_getx/app/config/environment_config.dart';
-import 'package:flutter_base_getx/app/data/model/local_notification.dart';
-import 'package:flutter_base_getx/app/utils/firebase_utils.dart';
-import 'package:flutter_base_getx/app/utils/local_notification_utils.dart';
+import 'package:flutter_base_getx/app/config/flavor_config.dart';
+import 'package:flutter_base_getx/app/data/models/notification/local_notification.dart';
+import 'package:flutter_base_getx/app/core/utils/firebase_utils.dart';
+import 'package:flutter_base_getx/app/core/utils/local_notification_utils.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationUtils {
@@ -22,7 +22,7 @@ class NotificationUtils {
     // todo to navigate to page with notification clicked
   }
 
-  Future<void> initNotification(EnvironmentConfig env) async {
+  Future<void> initNotification(FlavorConfig env) async {
     await FirebaseUtils.initFirebase(
       options: Platform.isAndroid
           ? env.firebaseConfig.android
