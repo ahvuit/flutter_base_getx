@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_base_getx/app/config/flavor_config.dart';
+import 'package:flutter_base_getx/app/config/env_config.dart';
 import 'package:flutter_base_getx/app/core/logger/logger_service.dart';
 import 'package:flutter_base_getx/app/core/storage/storage_service.dart';
 import 'package:flutter_base_getx/app/core/widget/loading_dialog.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_base_getx/app/di/locator.dart' as di;
 class DioConfig {
   static Dio createDio() {
     final dio = Dio(BaseOptions(
-      baseUrl: FlavorConfig.instance.apiBaseUrl,
+      baseUrl: EnvConfig.instance.apiBaseUrl,
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       headers: _defaultHeaders(),
@@ -114,7 +114,7 @@ class DioConfig {
       error: true,
       compact: true,
       maxWidth: 90,
-      enabled: kDebugMode || FlavorConfig.instance.flavor == Flavor.dev,
+      enabled: kDebugMode || EnvConfig.instance.flavor == Flavor.dev,
     );
   }
 

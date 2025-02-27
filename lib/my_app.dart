@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_base_getx/app/config/flavor_config.dart';
+import 'package:flutter_base_getx/app/config/env_config.dart';
 import 'package:flutter_base_getx/app/core/utils/notification_utils.dart';
 import 'package:flutter_base_getx/app/core/utils/screen_utils.dart';
 import 'package:flutter_base_getx/app/routes/app_pages.dart';
@@ -15,8 +15,8 @@ import 'package:flutter_base_getx/app/di/locator.dart' as di;
 void mainCommon(Flavor flavor) async {
   runZonedGuarded(() async {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-    FlavorConfig.initialize(flavor);
-    await NotificationUtils().initNotification(FlavorConfig.instance);
+    EnvConfig.initialize(flavor);
+    await NotificationUtils().initNotification(EnvConfig.instance);
     await di.init();
     runApp(const MyApp());
   }, (exception, stackTrace) async {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       navigatorKey: di.sl<GlobalKey<NavigatorState>>(),
-      title: FlavorConfig.instance.appName,
+      title: EnvConfig.instance.appName,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       supportedLocales: AppLocalizations.delegate.supportedLocales,

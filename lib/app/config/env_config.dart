@@ -7,20 +7,20 @@ enum Flavor {
   prod,
 }
 
-class FlavorConfig {
+class EnvConfig {
   final Flavor flavor;
   final String apiBaseUrl;
   final String appName;
   final FirebaseConfig firebaseConfig;
 
-  FlavorConfig({
+  EnvConfig({
     required this.flavor,
     required this.apiBaseUrl,
     required this.appName,
     required this.firebaseConfig,
   });
 
-  static late FlavorConfig instance;
+  static late EnvConfig instance;
 
   static void initialize(Flavor flavor) {
     switch (flavor) {

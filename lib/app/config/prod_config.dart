@@ -1,6 +1,6 @@
-import 'package:flutter_base_getx/app/config/flavor_config.dart';
+import 'package:flutter_base_getx/app/config/env_config.dart';
 
-class ProdConfig implements FlavorConfig {
+class ProdConfig implements EnvConfig {
   @override
   Flavor get flavor => Flavor.prod;
 
