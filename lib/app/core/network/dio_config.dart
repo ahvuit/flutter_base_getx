@@ -39,6 +39,11 @@ class DioConfig {
     return dio;
   }
 
+  /// Creates and configures a Dio instance with default headers only.
+  static Dio createDefaultDio() {
+    return createDio();
+  }
+
   /// Returns the default headers for Dio requests.
   static Map<String, String> _defaultHeaders() {
     return {

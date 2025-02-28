@@ -50,4 +50,8 @@ class BaseResponse extends CoreResponse {
         ? "Server error..."
         : error.errorMessage;
   }
+
+  bool hasPagination() {
+    return pagination != null;
+  }
 }

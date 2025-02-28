@@ -22,7 +22,7 @@ class NetworkInfo extends GetxService {
     super.onInit();
     _connectivityStream =
         BehaviorSubject<ConnectivityResult>.seeded(ConnectivityResult.wifi);
-    _initConnectivity();
+    _initConnectivity().catchError(_handleError);
   }
 
   @override
@@ -34,18 +34,13 @@ class NetworkInfo extends GetxService {
   /// Initializes connectivity monitoring.
   Future<void> _initConnectivity() async {
     try {
-      var initialResult = await Connectivity().checkConnectivity();
-
-      if (initialResult.first == ConnectivityResult.none) {
-        _updateConnectionStatus(initialResult);
-      }
+      var initialResult = await _connectivity.checkConnectivity();
+      _updateConnectionStatus([initialResult.first]);
 
       _connectivity.onConnectivityChanged
           .debounceTime(const Duration(milliseconds: 500))
           .listen((result) => _updateConnectionStatus(result))
-          .onError((error) {
-        _handleError(error);
-      });
+          .onError(_handleError);
     } catch (e) {
       _handleError(e);
     }

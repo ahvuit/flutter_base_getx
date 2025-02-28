@@ -33,8 +33,9 @@ abstract class BaseController extends GetxController {
   /// [value] - The new loading state.
   void setLoading(bool value) {
     isLoading.value = value;
-    if (!value)
+    if (!value) {
       retryCount.value = 0; // Reset retry count when loading is complete
+    }
   }
 
   /// Handles errors with retry option and custom callback

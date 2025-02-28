@@ -40,4 +40,9 @@ class RateLimiter {
   DateTime? get nextAvailableTime => _requestTimestamps.isNotEmpty
       ? _requestTimestamps.first.add(window)
       : null;
+
+  /// Resets the rate limiter by clearing all request timestamps.
+  void reset() {
+    _requestTimestamps.clear();
+  }
 }
