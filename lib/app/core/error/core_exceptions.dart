@@ -1,89 +1,40 @@
-class ServerException implements Exception {
+abstract class CoreException implements Exception {
   final String message;
-  ServerException(this.message);
+
+  CoreException(this.message);
 
   @override
-  String toString() {
-    return 'ServerException: $message. Please check the server configuration and try again.';
-  }
+  String toString() => '$runtimeType: $message';
 }
 
-class NetworkException implements Exception {
-  final String message;
-  NetworkException(this.message);
-
-  @override
-  String toString() {
-    return 'NetworkException: $message. Please check your network connection and try again.';
-  }
+class ServerException extends CoreException {
+  ServerException(super.message);
 }
 
-class CacheException implements Exception {
-  final String message;
-  CacheException(this.message);
-
-  @override
-  String toString() {
-    return 'CacheException: $message. Please check the cache storage and try again.';
-  }
+class NetworkException extends CoreException {
+  NetworkException(super.message);
 }
 
-class UnauthorizedException implements Exception {
-  final String message;
-  UnauthorizedException(this.message);
-
-  @override
-  String toString() {
-    return 'UnauthorizedException: $message. Please check your credentials and try again.';
-  }
+class CacheException extends CoreException {
+  CacheException(super.message);
 }
 
-class RateLimitException implements Exception {
-  final String message;
-  RateLimitException(this.message);
-
-  @override
-  String toString() {
-    return 'RateLimitException: $message. Please wait before making more requests.';
-  }
+class UnauthorizedException extends CoreException {
+  UnauthorizedException(super.message);
 }
 
-class UnknownException implements Exception {
-  final String message;
-  UnknownException(this.message);
-
-  @override
-  String toString() {
-    return 'UnknownException: $message. An unknown error occurred.';
-  }
+class RateLimitException extends CoreException {
+  RateLimitException(super.message);
 }
 
-class ForbiddenException implements Exception {
-  final String message;
-  ForbiddenException(this.message);
-
-  @override
-  String toString() {
-    return 'ForbiddenException: $message. Access to the requested resource is denied.';
-  }
+class ForbiddenException extends CoreException {
+  ForbiddenException(super.message);
 }
 
-class BadRequestException implements Exception {
-  final String message;
-  BadRequestException(this.message);
-
-  @override
-  String toString() {
-    return 'BadRequestException: $message. The request could not be understood or was missing required parameters.';
-  }
+class BadRequestException extends CoreException {
+  BadRequestException(super.message);
 }
 
-class NotFoundException implements Exception {
-  final String message;
-  NotFoundException(this.message);
-
-  @override
-  String toString() {
-    return 'NotFoundException: $message. The requested resource could not be found.';
-  }
+class NotFoundException extends CoreException {
+  NotFoundException(super.message);
 }

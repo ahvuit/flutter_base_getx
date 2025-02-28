@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import '../logger/logger_service.dart';
+import '../logger/core_logger.dart';
 import 'permission_utils.dart';
 import 'package:flutter_base_getx/app/di/locator.dart' as di;
 
@@ -11,11 +11,11 @@ class ImagePickerUtils {
     if (await PermissionUtils.requestCameraPermission()) {
       final pickedFile = await _picker.pickImage(source: ImageSource.camera);
       if (pickedFile != null) {
-        di.sl<LoggerService>().i('Image picked from camera: ${pickedFile.path}');
+        di.sl<CoreLogger>().i('Image picked from camera: ${pickedFile.path}');
         return File(pickedFile.path);
       }
     }
-    di.sl<LoggerService>().w('Image pick from camera failed or cancelled');
+    di.sl<CoreLogger>().w('Image pick from camera failed or cancelled');
     return null;
   }
 
@@ -23,11 +23,11 @@ class ImagePickerUtils {
     if (await PermissionUtils.requestStoragePermission()) {
       final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
-        di.sl<LoggerService>().i('Image picked from gallery: ${pickedFile.path}');
+        di.sl<CoreLogger>().i('Image picked from gallery: ${pickedFile.path}');
         return File(pickedFile.path);
       }
     }
-    di.sl<LoggerService>().w('Image pick from gallery failed or cancelled');
+    di.sl<CoreLogger>().w('Image pick from gallery failed or cancelled');
     return null;
   }
 }

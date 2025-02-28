@@ -1,4 +1,4 @@
-import 'package:flutter_base_getx/app/core/logger/logger_service.dart';
+import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
 import 'package:flutter_base_getx/app/data/datasources/remote/example_remote_datasource.dart';
 import 'package:flutter_base_getx/app/data/models/example/example_model.dart';
 import 'package:flutter_base_getx/app/di/locator.dart' as di;
@@ -10,7 +10,7 @@ abstract class ExampleRepository {
 
 class ExampleRepositoryImpl implements ExampleRepository {
   final ExampleRemoteDataSource remoteDataSource;
-  final LoggerService _logger = di.sl<LoggerService>();
+  final CoreLogger _logger = di.sl<CoreLogger>();
 
   ExampleRepositoryImpl(this.remoteDataSource);
 

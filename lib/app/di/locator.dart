@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_getx/app/core/logger/logger_service.dart';
+import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
 import 'package:flutter_base_getx/app/core/network/dio_config.dart';
 import 'package:flutter_base_getx/app/core/network/network_info.dart';
 import 'package:flutter_base_getx/app/core/network/rate_limiter.dart';
@@ -18,26 +18,32 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   // Logger
-  sl.registerLazySingleton(() => LoggerService());
+  sl.registerLazySingleton(() => CoreLogger());
 
   // Repository
-  sl.registerLazySingleton<ExampleRepository>(() => ExampleRepositoryImpl(sl()));
+  sl.registerLazySingleton<ExampleRepository>(
+      () => ExampleRepositoryImpl(sl()));
 
   // Data sources
-  sl.registerLazySingleton<ExampleRemoteDataSource>(() => ExampleRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<ExampleRemoteDataSource>(
+      () => ExampleRemoteDataSourceImpl(sl()));
 
   // Storage services
-  sl.registerLazySingleton<StorageService>(() => SharedPreferencesService(sl()));
-  sl.registerLazySingleton<StorageService>(() => SecureStorageService(sl()), instanceName: 'secure');
-  sl.registerSingletonAsync<SharedPreferences>(() => SharedPreferences.getInstance());
+  sl.registerLazySingleton<StorageService>(
+      () => SharedPreferencesService(sl()));
+  sl.registerLazySingleton<StorageService>(() => SecureStorageService(sl()),
+      instanceName: 'secure');
+  sl.registerSingletonAsync<SharedPreferences>(
+      () => SharedPreferences.getInstance());
   sl.registerLazySingleton(() => const FlutterSecureStorage());
 
   // Network info
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  sl.registerLazySingleton(() => NetworkInfo());
   sl.registerLazySingleton(() => Connectivity());
 
   // Rate Limiter
-  sl.registerLazySingleton(() => RateLimiter(maxRequests: 10, window: const Duration(minutes: 1)));
+  sl.registerLazySingleton(
+      () => RateLimiter(maxRequests: 10, window: const Duration(minutes: 1)));
 
   // Dio
   sl.registerLazySingleton(() => DioConfig.createDio());

@@ -7,7 +7,8 @@ class SecureStorageService implements StorageService {
   SecureStorageService(this._storage);
 
   @override
-  Future<void> write(String key, String value) async => await _storage.write(key: key, value: value);
+  Future<void> write(String key, String value) async =>
+      await _storage.write(key: key, value: value);
   @override
   Future<String?> read(String key) async => await _storage.read(key: key);
   @override

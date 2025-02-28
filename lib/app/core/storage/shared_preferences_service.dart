@@ -7,7 +7,8 @@ class SharedPreferencesService implements StorageService {
   SharedPreferencesService(this._prefs);
 
   @override
-  Future<void> write(String key, String value) async => await _prefs.setString(key, value);
+  Future<void> write(String key, String value) async =>
+      await _prefs.setString(key, value);
   @override
   Future<String?> read(String key) async => _prefs.getString(key);
   @override

@@ -12,12 +12,14 @@ class EnvConfig {
   final String apiBaseUrl;
   final String appName;
   final FirebaseConfig firebaseConfig;
+  final String sslFingerprints;
 
   EnvConfig({
     required this.flavor,
     required this.apiBaseUrl,
     required this.appName,
     required this.firebaseConfig,
+    required this.sslFingerprints,
   });
 
   static late EnvConfig instance;
@@ -42,4 +44,3 @@ class FirebaseConfig {
     required this.ios,
   });
 }
-

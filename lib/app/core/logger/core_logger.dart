@@ -1,19 +1,19 @@
 import 'package:logger/logger.dart';
 
-class LoggerService {
+class CoreLogger {
   final Logger _logger;
 
-  LoggerService(): _logger = Logger(
-    ///Initial logger printer
-    printer: PrettyPrinter(
-        methodCount: 0,
-        errorMethodCount: 3,
-        lineLength: 80,
-        colors: true,
-        printEmojis: true,
-        printTime: true
-    ),
-  );
+  CoreLogger()
+      : _logger = Logger(
+          ///Initial logger printer
+          printer: PrettyPrinter(
+              methodCount: 0,
+              errorMethodCount: 3,
+              lineLength: 80,
+              colors: true,
+              printEmojis: true,
+              printTime: true),
+        );
 
   void _log(Level level, dynamic message,
       [dynamic error, StackTrace? stackTrace]) {

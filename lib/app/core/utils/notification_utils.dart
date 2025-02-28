@@ -22,32 +22,43 @@ class NotificationUtils {
     // todo to navigate to page with notification clicked
   }
 
+  /// Initializes notifications with the given [env] configuration.
   Future<void> initNotification(EnvConfig env) async {
-    await FirebaseUtils.initFirebase(
-      options: Platform.isAndroid
-          ? env.firebaseConfig.android
-          : env.firebaseConfig.ios,
-    );
-    await FirebaseUtils.requestNotificationPermissions();
-    LocalNotificationUtils.initialize(
-        onSelectNotification: _handleSelectNotification);
+    try {
+      await FirebaseUtils.initFirebase(
+        options: Platform.isAndroid
+            ? env.firebaseConfig.android
+            : env.firebaseConfig.ios,
+      );
+      await FirebaseUtils.requestNotificationPermissions();
+      LocalNotificationUtils.initialize(
+          onSelectNotification: _handleSelectNotification);
 
-    FirebaseUtils.setUpFCMMessage(
-      _handleTokenChange,
-      onReceiveMessage: (message) {
-        LocalNotificationUtils.showNotificationOnForeground(message);
-      },
-      onMessageOpenedApp: _handleMessageOpenedApp,
-      onReceiveBackgroundMessage: onBackgroundMessage,
-    );
+      FirebaseUtils.setUpFCMMessage(
+        _handleTokenChange,
+        onReceiveMessage: (message) {
+          LocalNotificationUtils.showNotificationOnForeground(message);
+        },
+        onMessageOpenedApp: _handleMessageOpenedApp,
+        onReceiveBackgroundMessage: onBackgroundMessage,
+      );
+    } catch (e) {
+      debugPrint('Failed to initialize notifications: $e');
+    }
   }
 
+  /// Handles token changes and registers the device with the new token.
   Future<void> _handleTokenChange(String? token) async {
     debugPrint('_handleTokenChange');
-    await registerDeviceWithToken(token);
+    try {
+      await registerDeviceWithToken(token);
+    } catch (e) {
+      debugPrint('Failed to handle token change: $e');
+    }
   }
 
-  handleReceiveMessage(RemoteMessage message) {
+  /// Handles receiving a message and shows a local notification.
+  void handleReceiveMessage(RemoteMessage message) {
     final localNotification = message.toLocalModel();
     final title = localNotification.notificationTitle;
     final content = localNotification.notificationContent;
@@ -56,7 +67,8 @@ class NotificationUtils {
         title: title, content: content, payload: payload);
   }
 
-  _handleSelectNotification(NotificationResponse response) {
+  /// Handles selecting a notification and navigates to the appropriate page.
+  void _handleSelectNotification(NotificationResponse response) {
     debugPrint('select notification, payload= ${response.payload}');
     if (response.payload != null) {
       final message = LocalNotification.fromJson(jsonDecode(response.payload!));
@@ -66,13 +78,14 @@ class NotificationUtils {
     }
   }
 
-  _handleMessageOpenedApp(RemoteMessage message) {
+  /// Handles opening the app from a notification.
+  void _handleMessageOpenedApp(RemoteMessage message) {
     debugPrint('message opened app, message= $message');
     _handleNavigateNotification(message.toLocalModel());
   }
 }
 
-/// Handle android firebase background  message
+/// Handle android firebase background message
 Future<void> onBackgroundMessage(RemoteMessage message) async {
   debugPrint('onBackgroundMessage - $message');
   if (message.notification == null) {

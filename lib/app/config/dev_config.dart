@@ -13,4 +13,8 @@ class DevConfig implements EnvConfig {
   @override
   // TODO: implement firebaseConfig
   FirebaseConfig get firebaseConfig => throw UnimplementedError();
+
+  @override
+  // TODO: implement sslFingerprints
+  String get sslFingerprints => throw UnimplementedError();
 }

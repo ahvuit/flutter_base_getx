@@ -1,23 +1,43 @@
+import 'package:flutter_base_getx/app/core/error/core_error_handler.dart';
+import 'package:flutter_base_getx/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class SplashScreenController extends GetxController {
-  //TODO: Implement SplashScreenController
+  final fadeIn = false.obs;
+  final slideUp = false.obs;
+  final showLoading = false.obs;
+  final loadingText = 'Loading...'.obs;
+  final errorMessage = ''.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    _startAnimations();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  void _startAnimations() async {
+    try {
+      // Start fade in and slide up animations
+      await Future.delayed(const Duration(milliseconds: 500));
+      fadeIn.value = true;
+      slideUp.value = true;
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+      // Show loading indicator
+      await Future.delayed(const Duration(milliseconds: 1000));
+      showLoading.value = true;
 
-  void increment() => count.value++;
+      // Simulate loading process
+      await Future.delayed(const Duration(milliseconds: 1000));
+      loadingText.value = 'Checking credentials...';
+
+      await Future.delayed(const Duration(milliseconds: 1000));
+      loadingText.value = 'Almost there...';
+
+      // Navigate to next screen
+      await Future.delayed(const Duration(milliseconds: 1000));
+      Get.offAllNamed(Routes.LOGIN);
+    } catch (error) {
+      errorMessage.value = CoreErrorHandler.handleException(error);
+    }
+  }
 }

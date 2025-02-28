@@ -1,5 +1,5 @@
 import 'package:flutter_base_getx/app/core/error/core_error_handler.dart';
-import 'package:flutter_base_getx/app/core/logger/logger_service.dart';
+import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
 import 'package:flutter_base_getx/app/data/models/example/example_model.dart';
 import 'package:flutter_base_getx/app/data/service/example_api_service.dart';
 import 'package:flutter_base_getx/app/di/locator.dart' as di;
@@ -11,7 +11,7 @@ abstract class ExampleRemoteDataSource {
 
 class ExampleRemoteDataSourceImpl implements ExampleRemoteDataSource {
   final ExampleApiService apiService;
-  final LoggerService _logger = di.sl<LoggerService>();
+  final CoreLogger _logger = di.sl<CoreLogger>();
 
   ExampleRemoteDataSourceImpl(this.apiService);
 

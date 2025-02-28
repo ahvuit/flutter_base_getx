@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_getx/app/core/logger/logger_service.dart';
 
 class LoadingDialog {
   OverlayEntry? _overlayEntry;
@@ -12,7 +11,8 @@ class LoadingDialog {
     _overlayEntry = OverlayEntry(
       builder: (context) => Stack(
         children: [
-          ModalBarrier(dismissible: false, color: Colors.black.withOpacity(0.5)),
+          ModalBarrier(
+              dismissible: false, color: Colors.black.withOpacity(0.5)),
           Center(
             child: Container(
               padding: EdgeInsets.all(16),

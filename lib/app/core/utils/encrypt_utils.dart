@@ -1,5 +1,5 @@
 import 'package:encrypt/encrypt.dart' as encrypt;
-import '../logger/logger_service.dart';
+import '../logger/core_logger.dart';
 import 'package:flutter_base_getx/app/di/locator.dart' as di;
 
 class EncryptUtils {
@@ -9,13 +9,13 @@ class EncryptUtils {
 
   static String encryptText(String plainText) {
     final encrypted = _encrypt.encrypt(plainText, iv: _iv);
-    di.sl<LoggerService>().i('Text encrypted');
+    di.sl<CoreLogger>().i('Text encrypted');
     return encrypted.base64;
   }
 
   static String decryptText(String encryptedText) {
     final decrypted = _encrypt.decrypt64(encryptedText, iv: _iv);
-    di.sl<LoggerService>().i('Text decrypted');
+    di.sl<CoreLogger>().i('Text decrypted');
     return decrypted;
   }
 }

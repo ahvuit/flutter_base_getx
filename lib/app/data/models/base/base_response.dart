@@ -25,6 +25,7 @@ class BaseResponse extends CoreResponse {
   factory BaseResponse.fromJson(Map<String, dynamic> json) =>
       _$BaseResponseFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$BaseResponseToJson(this);
 
   @override

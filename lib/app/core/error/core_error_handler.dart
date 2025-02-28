@@ -1,67 +1,59 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
 import 'core_exceptions.dart';
 import 'package:flutter_base_getx/app/di/locator.dart' as di;
-import '../logger/logger_service.dart';
 
 class CoreErrorHandler {
-  static String handleException(dynamic error) {
-    final logger = di.sl<LoggerService>();
-    logger.e('Handling exception: $error', error is Exception ? error : null);
+  static String handleException(
+    dynamic error, {
+    String defaultMessage = 'An unexpected error occurred',
+    bool includeStackTrace = false,
+  }) {
+    final logger = di.sl<CoreLogger>();
+    final stackTrace =
+        includeStackTrace && error is Exception ? StackTrace.current : null;
+    logger.e('Handling exception: $error', error, stackTrace);
 
-    if (error is DioException) {
-      return _handleDioException(error);
-    } else if (error is ServerException) {
-      return error.message;
-    } else if (error is NetworkException) {
-      return error.message;
-    } else if (error is CacheException) {
-      return error.message;
-    } else if (error is UnauthorizedException) {
-      return error.message;
-    } else if (error is ForbiddenException) {
-      return error.message;
-    } else if (error is BadRequestException) {
-      return error.message;
-    } else if (error is NotFoundException) {
-      return error.message;
-    } else if (error is RateLimitException) {
-      return error.message;
-    } else {
-      return error.toString();
-    }
+    return switch (error) {
+      DioException dioError => _handleDioException(dioError),
+      CoreException coreError => coreError.message,
+      _ => _formatErrorMessage(error?.toString() ?? defaultMessage, stackTrace),
+    };
   }
 
   static String _handleDioException(DioException error) {
-    switch (error.type) {
-      case DioExceptionType.connectionTimeout:
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
-        return 'Connection timeout';
-      case DioExceptionType.badCertificate:
-        return 'Invalid SSL certificate';
-      case DioExceptionType.connectionError:
-        return 'No internet connection';
-      case DioExceptionType.badResponse:
-        switch (error.response?.statusCode) {
-          case 400:
-            return 'Bad request: ${error.response?.data['message'] ?? 'Unknown error'}';
-          case 401:
-            return 'Unauthorized: ${error.response?.data['message'] ?? 'Invalid credentials'}';
-          case 403:
-            return 'Forbidden: ${error.response?.data['message'] ?? 'Access denied'}';
-          case 404:
-            return 'Not found: ${error.response?.data['message'] ?? 'Resource not found'}';
-          case 429:
-            return 'Rate limit exceeded: ${error.response?.data['message'] ?? 'Too many requests'}';
-          case 500:
-            return 'Server error: ${error.response?.data['message'] ?? 'Internal server error'}';
-          default:
-            return 'Unexpected error: ${error.response?.statusCode} - ${error.response?.data['message'] ?? 'Unknown'}';
-        }
-      case DioExceptionType.cancel:
-        return 'Request cancelled';
-      default:
-        return 'Unknown Dio error: ${error.message}';
-    }
+    final response = error.response;
+    return switch (error.type) {
+      DioExceptionType.connectionTimeout ||
+      DioExceptionType.sendTimeout ||
+      DioExceptionType.receiveTimeout =>
+        'error_network_timeout',
+      DioExceptionType.badCertificate => 'error_ssl_certificate',
+      DioExceptionType.connectionError => 'error_no_internet',
+      DioExceptionType.badResponse => _handleHttpError(response),
+      DioExceptionType.cancel => 'error_request_cancelled',
+      _ => 'error_dio_unknown_${error.message}',
+    };
+  }
+
+  static String _handleHttpError(Response? response) {
+    final statusCode = response?.statusCode;
+    final message = response?.data is Map
+        ? response?.data['message']?.toString()
+        : response?.statusMessage ?? 'Unknown error';
+
+    return switch (statusCode) {
+      400 => 'error_bad_request_$message',
+      401 => 'error_unauthorized_$message',
+      403 => 'error_forbidden_$message',
+      404 => 'error_not_found_$message',
+      429 => 'error_rate_limit_$message',
+      500 => 'error_server_$message',
+      _ => 'error_http_$statusCode $message',
+    };
+  }
+
+  static String _formatErrorMessage(String message, StackTrace? stackTrace) {
+    return stackTrace != null ? '$message\nStackTrace: $stackTrace' : message;
   }
 }
