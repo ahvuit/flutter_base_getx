@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'exceptions.dart';
+import 'core_exceptions.dart';
 import 'package:flutter_base_getx/app/di/locator.dart' as di;
 import '../logger/logger_service.dart';
 
-class ErrorHandler {
+class CoreErrorHandler {
   static String handleException(dynamic error) {
     final logger = di.sl<LoggerService>();
     logger.e('Handling exception: $error', error is Exception ? error : null);
@@ -17,6 +17,12 @@ class ErrorHandler {
     } else if (error is CacheException) {
       return error.message;
     } else if (error is UnauthorizedException) {
+      return error.message;
+    } else if (error is ForbiddenException) {
+      return error.message;
+    } else if (error is BadRequestException) {
+      return error.message;
+    } else if (error is NotFoundException) {
       return error.message;
     } else if (error is RateLimitException) {
       return error.message;

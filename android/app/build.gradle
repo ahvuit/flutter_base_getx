@@ -38,6 +38,7 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.debug
         }
+    }
 
         debug {
             // TODO: Add your own signing config for the release build.
@@ -46,20 +47,26 @@ android {
         }
     }
 
-    flavorDimensions = ["fluttter_flavor_demo"]
+    flavorDimensions = ["default"]
     productFlavors {
         dev {
-            dimension "fluttter_flavor_demo"
-            applicationIdSuffix ".dev"
+            applicationId "com.ahvuit.flutter_base_getx"
+            dimension "default"
             resValue "string", "app_name", "base dev"
-            versionNameSuffix ".dev"
             flutter.target "lib/flavors/main_dev.dart"
+            setProperty("archivesBaseName", "fec-prod-" + defaultConfig.versionName)
+            manifestPlaceholders += [
+                    'appAuthRedirectScheme': '"com.ahvuit.flutter_base_getx"'
+            ]
         }
         prod {
-            dimension "fluttter_flavor_demo"
+            applicationId "com.ahvuit.flutter_base_getx"
+            dimension "default"
             resValue "string", "app_name", "base Prod"
-            versionNameSuffix ".prod"
-            flutter.target "lib/flavors/main_prod.dart"
+            setProperty("archivesBaseName", "fec-prod-" + defaultConfig.versionName)
+            manifestPlaceholders += [
+                    'appAuthRedirectScheme': '"com.ahvuit.flutter_base_getx"'
+            ]
         }
     }
 }

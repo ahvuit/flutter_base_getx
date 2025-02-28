@@ -1,4 +1,4 @@
-import 'package:flutter_base_getx/app/core/error/error_handler.dart';
+import 'package:flutter_base_getx/app/core/error/core_error_handler.dart';
 import 'package:flutter_base_getx/app/core/logger/logger_service.dart';
 import 'package:flutter_base_getx/app/data/models/example/example_model.dart';
 import 'package:flutter_base_getx/app/data/service/example_api_service.dart';
@@ -24,7 +24,7 @@ class ExampleRemoteDataSourceImpl implements ExampleRemoteDataSource {
       return result;
     } catch (e) {
       _logger.e('Failed to fetch example: $e');
-      throw ErrorHandler.handleException(e);
+      throw CoreErrorHandler.handleException(e);
     }
   }
 
@@ -37,7 +37,7 @@ class ExampleRemoteDataSourceImpl implements ExampleRemoteDataSource {
       return result;
     } catch (e) {
       _logger.e('Failed to fetch example list: $e');
-      throw ErrorHandler.handleException(e);
+      throw CoreErrorHandler.handleException(e);
     }
   }
 }

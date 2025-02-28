@@ -121,7 +121,6 @@ dev_dependencies:
   flutter_gen_runner: ^5.9.0
   build_runner: ^2.4.14
   retrofit_generator: ^9.1.7
-  json_serializable: ^6.6.1
 
 flutter:
   uses-material-design: true
@@ -130,14 +129,13 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/svgs/
 #Flutter gen - image widget gen
 flutter_gen:
   output: lib/gen/
   line_length: 80
   integrations:
     flutter_svg: true
-    flare_flutter: true
+    image: true
 
 flutter_intl:
   enabled: true

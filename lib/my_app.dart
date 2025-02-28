@@ -8,7 +8,7 @@ import 'package:flutter_base_getx/app/routes/app_pages.dart';
 import 'package:flutter_base_getx/l10n/gen/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'app/core/constants/app_theme.dart';
+import 'app/core/constants/core_theme.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:flutter_base_getx/app/di/locator.dart' as di;
 
