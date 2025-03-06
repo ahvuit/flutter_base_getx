@@ -25,12 +25,24 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/fe_logo_android12splash.png
+  AssetGenImage get feLogoAndroid12splash =>
+      const AssetGenImage('assets/images/fe_logo_android12splash.png');
+
+  /// File path: assets/images/fe_logo_splash.png
+  AssetGenImage get feLogoSplash =>
+      const AssetGenImage('assets/images/fe_logo_splash.png');
+
   /// File path: assets/images/img_zoom.png
   AssetGenImage get imgZoom =>
       const AssetGenImage('assets/images/img_zoom.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [imgZoom];
+  List<AssetGenImage> get values => [
+    feLogoAndroid12splash,
+    feLogoSplash,
+    imgZoom,
+  ];
 }
 
 class Assets {

@@ -4,7 +4,6 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
     id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -54,18 +53,19 @@ android {
             dimension "default"
             resValue "string", "app_name", "base dev"
             flutter.target "lib/flavors/main_dev.dart"
-            setProperty("archivesBaseName", "fec-prod-" + defaultConfig.versionName)
+            setProperty("archivesBaseName", "fec-dev-" + defaultConfig.versionName)
             manifestPlaceholders += [
-                    'appAuthRedirectScheme': '"com.ahvuit.flutter_base_getx"'
+                    'appAuthRedirectScheme': 'com.ahvuit.flutter_base_getx'
             ]
         }
         prod {
             applicationId "com.ahvuit.flutter_base_getx"
             dimension "default"
             resValue "string", "app_name", "base Prod"
+            flutter.target "lib/flavors/main_prod.dart"
             setProperty("archivesBaseName", "fec-prod-" + defaultConfig.versionName)
             manifestPlaceholders += [
-                    'appAuthRedirectScheme': '"com.ahvuit.flutter_base_getx"'
+                    'appAuthRedirectScheme': 'com.ahvuit.flutter_base_getx'
             ]
         }
     }

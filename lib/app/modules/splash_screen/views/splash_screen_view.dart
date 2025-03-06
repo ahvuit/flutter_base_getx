@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_getx/gen/assets.gen.dart';
 import 'package:get/get.dart';
 import '../controllers/splash_screen_controller.dart';
 
@@ -15,10 +16,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [
-              Colors.blue,
-              Colors.blueAccent,
-            ],
+            colors: [Colors.blue, Colors.blueAccent],
           ),
         ),
         child: Obx(() {
@@ -26,10 +24,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
             return Center(
               child: Text(
                 controller.errorMessage.value,
-                style: const TextStyle(
-                  color: Colors.red,
-                  fontSize: 16,
-                ),
+                style: const TextStyle(color: Colors.red, fontSize: 16),
               ),
             );
           } else {
@@ -48,11 +43,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
                       controller.slideUp.value ? 0 : 50,
                       0,
                     ),
-                    child: Image.asset(
-                      'assets/images/logo.png',
-                      width: 150,
-                      height: 150,
-                    ),
+                    child: Assets.icons.icLogo.svg(),
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -62,9 +53,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
                   duration: const Duration(milliseconds: 500),
                   child: Column(
                     children: [
-                      const CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
+                      const CircularProgressIndicator(color: Colors.white),
                       const SizedBox(height: 20),
                       Text(
                         controller.loadingText.value,

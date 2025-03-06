@@ -7,13 +7,15 @@ part of 'base_response.dart';
 // **************************************************************************
 
 BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse(
-      code: json['code'] ?? '000000',
-      errorMessage: json['errorMessage'] ?? "",
-      pagination: json['pagination'] == null
+  code: json['code'] ?? '000000',
+  errorMessage: json['errorMessage'] ?? "",
+  pagination:
+      json['pagination'] == null
           ? null
           : BasePagingResponse.fromJson(
-              json['pagination'] as Map<String, dynamic>),
-    )..message = json['message'] as String?;
+            json['pagination'] as Map<String, dynamic>,
+          ),
+)..message = json['message'] as String?;
 
 Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
     <String, dynamic>{

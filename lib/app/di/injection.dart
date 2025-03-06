@@ -20,9 +20,9 @@ abstract class AppModule {
   @singleton
   Dio get dio => DioConfig().dio;
 
-  @singleton
-  FirebaseMessaging get firebaseMessaging => FirebaseMessaging.instance;
-
-  @singleton
-  FlutterLocalNotificationsPlugin get localNotificationsPlugin => FlutterLocalNotificationsPlugin();
+  // @singleton
+  // FirebaseMessaging get firebaseMessaging => FirebaseMessaging.instance;
+  //
+  // @singleton
+  // FlutterLocalNotificationsPlugin get localNotificationsPlugin => FlutterLocalNotificationsPlugin();
 }

@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 
@@ -10,9 +9,9 @@ class FirebaseUtils {
       {String? name, FirebaseOptions? options}) async {
     try {
       await Firebase.initializeApp(name: name, options: options);
-      // Pass all uncaught errors from the framework to Crashlytics.
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-      FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+      // // Pass all uncaught errors from the framework to Crashlytics.
+      // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+      // FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     } catch (e) {
       debugPrint('Failed to initialize Firebase: $e');
     }

@@ -28,12 +28,12 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
-        android:label="flutter_base_getx"
+        android:label="@string/app_name"
         android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
-        android:icon="@mipmap/ic_launcher"
-        tools:targetApi="33">
+        tools:replace="android:label">
 
         <activity
             android:name=".MainActivity"
@@ -47,6 +47,9 @@
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />
+            <meta-data
+                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+                android:resource="@drawable/launch_background" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

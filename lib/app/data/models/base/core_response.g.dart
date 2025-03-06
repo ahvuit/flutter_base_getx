@@ -7,9 +7,9 @@ part of 'core_response.dart';
 // **************************************************************************
 
 CoreResponse _$CoreResponseFromJson(Map<String, dynamic> json) => CoreResponse(
-      message: json['message'] as String? ?? "",
-      errorMessage: json['errorMessage'] as String? ?? "",
-    );
+  message: json['message'] as String? ?? "",
+  errorMessage: json['errorMessage'] as String? ?? "",
+);
 
 Map<String, dynamic> _$CoreResponseToJson(CoreResponse instance) =>
     <String, dynamic>{
