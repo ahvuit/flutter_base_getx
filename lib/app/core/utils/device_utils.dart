@@ -1,11 +1,12 @@
 import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
-import 'package:flutter_base_getx/app/di/locator.dart' as di;
+import 'package:flutter_base_getx/app/di/injection.dart';
 
 class DeviceUtils {
   static Future<String> getDeviceId() async {
-    final logger = di.sl<CoreLogger>();
+    final logger = getIt<CoreLogger>();
     final deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       final androidInfo = await deviceInfo.androidInfo;
@@ -20,7 +21,7 @@ class DeviceUtils {
   }
 
   static Future<String> getDeviceName() async {
-    final logger = di.sl<CoreLogger>();
+    final logger = getIt<CoreLogger>();
     final deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       final androidInfo = await deviceInfo.androidInfo;

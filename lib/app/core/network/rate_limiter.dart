@@ -1,19 +1,21 @@
 import 'dart:async';
 import 'dart:collection';
-import '../logger/core_logger.dart';
-import 'package:flutter_base_getx/app/di/locator.dart' as di;
+import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
+import 'package:flutter_base_getx/app/di/injection.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class RateLimiter {
   final int maxRequests;
   final Duration window;
   final Queue<DateTime> _requestTimestamps = Queue();
+  final logger = getIt<CoreLogger>();
 
   RateLimiter({required this.maxRequests, required this.window});
 
   /// Determines if a request can be made based on the rate limit.
   Future<bool> canRequest() async {
     final now = DateTime.now();
-    final logger = di.sl<CoreLogger>();
 
     // Remove timestamps that are outside the rate limit window
     while (_requestTimestamps.isNotEmpty &&

@@ -1,13 +1,15 @@
 import 'dart:io';
+
+import 'package:flutter_base_getx/app/di/injection.dart';
 import 'package:path_provider/path_provider.dart';
+
 import '../logger/core_logger.dart';
-import 'package:flutter_base_getx/app/di/locator.dart' as di;
 
 class FileUtils {
   static Future<File> writeFile(String fileName, String content) async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/$fileName');
-    di.sl<CoreLogger>().i('Writing to file: ${file.path}');
+    getIt<CoreLogger>().i('Writing to file: ${file.path}');
     return await file.writeAsString(content);
   }
 
@@ -15,10 +17,10 @@ class FileUtils {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/$fileName');
     if (await file.exists()) {
-      di.sl<CoreLogger>().i('Reading file: ${file.path}');
+      getIt<CoreLogger>().i('Reading file: ${file.path}');
       return await file.readAsString();
     } else {
-      di.sl<CoreLogger>().w('File not found: ${file.path}');
+      getIt<CoreLogger>().w('File not found: ${file.path}');
       return null;
     }
   }
@@ -28,7 +30,7 @@ class FileUtils {
     final file = File('${directory.path}/$fileName');
     if (await file.exists()) {
       await file.delete();
-      di.sl<CoreLogger>().i('Deleted file: ${file.path}');
+      getIt<CoreLogger>().i('Deleted file: ${file.path}');
     }
   }
 }

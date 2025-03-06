@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_base_getx/app/core/error/core_error_handler.dart';
 import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
-import 'package:flutter_base_getx/app/di/locator.dart' as di;
+import 'package:flutter_base_getx/app/di/injection.dart';
 import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 abstract class BaseController extends GetxController {
-  final CoreLogger _logger = di.sl<CoreLogger>();
+  final CoreLogger _logger = getIt<CoreLogger>();
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
   final RxInt retryCount = 0.obs;

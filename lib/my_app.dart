@@ -8,16 +8,17 @@ import 'package:flutter_base_getx/app/routes/app_pages.dart';
 import 'package:flutter_base_getx/l10n/gen/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'app/core/constants/core_theme.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:flutter_base_getx/app/di/locator.dart' as di;
+
+import 'app/core/constants/core_theme.dart';
+import 'app/di/injection.dart';
 
 void mainCommon(Flavor flavor) async {
   runZonedGuarded(() async {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     EnvConfig.initialize(flavor);
-    await NotificationUtils().initNotification(EnvConfig.instance);
-    await di.init();
+    //await NotificationUtils().initNotification(EnvConfig.instance);
+    configureDependencies();
     runApp(const MyApp());
   }, (exception, stackTrace) async {
     await Sentry.captureException(exception, stackTrace: stackTrace);
@@ -30,7 +31,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      navigatorKey: di.sl<GlobalKey<NavigatorState>>(),
       title: EnvConfig.instance.appName,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,

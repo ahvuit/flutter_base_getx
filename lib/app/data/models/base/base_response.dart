@@ -18,9 +18,7 @@ class BaseResponse extends CoreResponse {
     this.code = '000000',
     errorMessage = "",
     this.pagination,
-  }) : super(
-          errorMessage: errorMessage,
-        );
+  }) : super(errorMessage: errorMessage);
 
   factory BaseResponse.fromJson(Map<String, dynamic> json) =>
       _$BaseResponseFromJson(json);

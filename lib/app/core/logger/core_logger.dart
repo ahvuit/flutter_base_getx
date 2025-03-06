@@ -1,5 +1,7 @@
+import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
+@singleton
 class CoreLogger {
   final Logger _logger;
 

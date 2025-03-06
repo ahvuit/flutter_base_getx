@@ -2,16 +2,18 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
-import 'package:flutter_base_getx/app/di/locator.dart' as di;
+import 'package:flutter_base_getx/app/di/injection.dart';
 import 'package:get/get.dart';
+import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+@injectable
 class NetworkInfo extends GetxService {
   final RxBool _isConnected = true.obs;
   final RxBool _isShowingDialog = false.obs;
   final Connectivity _connectivity = Connectivity();
-  final logger = di.sl<CoreLogger>();
+  final logger = getIt<CoreLogger>();
   late BehaviorSubject<ConnectivityResult> _connectivityStream;
 
   bool get isConnected => _isConnected.value;

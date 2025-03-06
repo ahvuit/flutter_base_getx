@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
+import 'package:flutter_base_getx/app/di/injection.dart';
 import 'core_exceptions.dart';
-import 'package:flutter_base_getx/app/di/locator.dart' as di;
 
 class CoreErrorHandler {
   static String handleException(
@@ -9,7 +9,7 @@ class CoreErrorHandler {
     String defaultMessage = 'An unexpected error occurred',
     bool includeStackTrace = false,
   }) {
-    final logger = di.sl<CoreLogger>();
+    final logger = getIt<CoreLogger>();
     final stackTrace =
         includeStackTrace && error is Exception ? StackTrace.current : null;
     logger.e('Handling exception: $error', error, stackTrace);
