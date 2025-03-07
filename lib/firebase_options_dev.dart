@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options.dart';
+/// import 'firebase_options_dev.dart';
 /// // ...
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,31 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBgt1wID2eS29zb4BuPa9cLPzfRPaiSoXE',
-    appId: '1:26893947834:web:12b8be40f3a5701e76c383',
-    messagingSenderId: '26893947834',
-    projectId: 'flutter-base-getx-dev-uat',
-    authDomain: 'flutter-base-getx-dev-uat.firebaseapp.com',
-    storageBucket: 'flutter-base-getx-dev-uat.firebasestorage.app',
-    measurementId: 'G-715JY85N88',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDZ2g7sAEfM6R5cwQl4Hy2Tm_FPLn6C1mc',
-    appId: '1:26893947834:android:1a84e43973c9a55a76c383',
-    messagingSenderId: '26893947834',
-    projectId: 'flutter-base-getx-dev-uat',
-    storageBucket: 'flutter-base-getx-dev-uat.firebasestorage.app',
+    apiKey: 'AIzaSyBV8S9WYr9V2DTtuw-TyCORh8BQ-yI0lYQ',
+    appId: '1:671568280385:android:b9ae9e9aa5145b238c7fc0',
+    messagingSenderId: '671568280385',
+    projectId: 'notification-dev-152b8',
+    storageBucket: 'notification-dev-152b8.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDfJb-Krn4hYfWN8ErNpMDeLI-H4KfZNuc',
-    appId: '1:26893947834:ios:88560601c548a96576c383',
-    messagingSenderId: '26893947834',
-    projectId: 'flutter-base-getx-dev-uat',
-    storageBucket: 'flutter-base-getx-dev-uat.firebasestorage.app',
-    iosBundleId: 'com.ahvuit.flutterBaseGetx',
+    apiKey: 'AIzaSyCfqL0MVXj9wt-sgNgksEQHGpmjbc1tsXA',
+    appId: '1:671568280385:ios:6fddd2e4311318288c7fc0',
+    messagingSenderId: '671568280385',
+    projectId: 'notification-dev-152b8',
+    storageBucket: 'notification-dev-152b8.firebasestorage.app',
+    iosBundleId: 'com.ahvuit.flutterBaseGetx.dev',
   );
-
 }

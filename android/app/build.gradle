@@ -49,13 +49,13 @@ android {
     flavorDimensions = ["default"]
     productFlavors {
         dev {
-            applicationId "com.ahvuit.flutter_base_getx"
+            applicationId "com.ahvuit.flutter_base_getx.dev"
             dimension "default"
             resValue "string", "app_name", "base dev"
             flutter.target "lib/flavors/main_dev.dart"
             setProperty("archivesBaseName", "fec-dev-" + defaultConfig.versionName)
             manifestPlaceholders += [
-                    'appAuthRedirectScheme': 'com.ahvuit.flutter_base_getx'
+                    'appAuthRedirectScheme': 'com.ahvuit.flutter_base_getx.dev'
             ]
         }
         prod {
