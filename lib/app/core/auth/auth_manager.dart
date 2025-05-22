@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class AuthManager extends TokenCacheManager {
+  AuthManager(super.storageBox, super.logger);
 
   Future<void> logOut() async {
     clearTokens();
