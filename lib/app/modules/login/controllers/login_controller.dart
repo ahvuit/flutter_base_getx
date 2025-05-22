@@ -1,31 +1,34 @@
-import 'package:flutter_base_getx/app/config/env_config.dart';
 import 'package:flutter_base_getx/app/core/base/base_controller.dart';
-import 'package:flutter_base_getx/app/core/utils/notification_utils.dart';
-import 'package:flutter_base_getx/app/data/repositories/example_repository.dart';
-import 'package:get/get.dart';
+import 'package:flutter_base_getx/app/core/utils/device_utils.dart';
+import 'package:flutter_base_getx/app/data/models/auth/check_update_request.dart';
+import 'package:flutter_base_getx/app/data/repositories/auth/auth_repository.dart';
+import 'package:flutter_base_getx/app/di/injection.dart';
 
 class LoginController extends BaseController {
-  final _exampleRepository = Get.find<ExampleRepository>();
+  final AuthRepository _authRepository = getIt<AuthRepository>();
 
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
-    //await NotificationUtils().initNotification(EnvConfig.instance);
+    callApi();
   }
 
   void callApi() async {
-    final result = await _exampleRepository.getExample(1);
+    final uuid = await DeviceUtils.getUUID();
+    CheckUpdateRequest request = CheckUpdateRequest(deviceId: uuid);
     setLoading(true);
+    final result = await _authRepository.checkUpdate(request);
 
     result.fold(
       (error) {
-        Get.snackbar('Error', error);
+        setLoading(false);
+        showErrorMessage(errorMessage: error.toString());
       },
       (response) {
+        setLoading(false);
         if (response.isSuccessCode()) {
-          print('[LoginController] Fetched example: ${response.data}');
         } else {
-          Get.snackbar('Error', response.errorMessage);
+          showErrorMessage(errorMessage: response.errorMessage);
         }
       },
     );

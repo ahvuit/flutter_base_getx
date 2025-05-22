@@ -7,8 +7,8 @@ import 'storage_service.dart';
 
 /// A service that provides persistent storage using GetStorage.
 /// Implements the StorageService interface for key-value storage operations.
-@singleton
-class GetStorageService implements StorageService {
+@Singleton(as: StorageService)
+class GetStorageService extends StorageService {
   static final _storage = GetStorage();
 
   /// Initializes GetStorage and ensures it's ready for use.

@@ -1,63 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_getx/app/core/widget/custom_dialog.dart';
+import 'package:flutter_base_getx/app/core/widget/list_skeleton.dart';
+import 'package:get/get.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
-/// A base screen widget that provides common functionality for all screens.
-abstract class BaseScreen<T extends StatefulWidget> extends State<T> {
-  /// Override this method to build the screen's UI.
-  Widget buildScreen(BuildContext context);
+abstract class BaseScreen<T extends GetxController> extends GetView<T> {
+  const BaseScreen({super.key});
 
-  /// Shows a loading indicator.
-  void showLoading() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
-  }
-
-  /// Hides the loading indicator.
-  void hideLoading() {
-    Navigator.of(context, rootNavigator: true).pop();
-  }
-
-  /// Shows an error message.
-  void showError(String message) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Error'),
-          content: Text(message),
-          actions: <Widget>[
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  /// Shows a custom input dialog.
-  void showInputDialog(
-      String title, String hintText, ValueChanged<String> onConfirm) {
-    CustomDialog.showInputDialog(context, title, hintText, onConfirm);
-  }
+  Widget buildMobile(BuildContext context);
+  Widget? buildTablet(BuildContext context) => null;
+  Widget? buildDesktop(BuildContext context) => null;
+  Widget? buildWatch(BuildContext context) => null;
+  Widget? buildLoading(BuildContext context) => null;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(runtimeType.toString()),
-      ),
-      body: buildScreen(context),
+    return Stack(
+      children: [
+        ResponsiveBuilder(
+          builder: (builderContext, sizingInformation) {
+            switch (sizingInformation.deviceScreenType) {
+              case DeviceScreenType.desktop:
+                return buildDesktop(context) ?? buildMobile(context);
+              case DeviceScreenType.tablet:
+                return buildTablet(context) ?? buildMobile(context);
+              case DeviceScreenType.mobile:
+                return buildMobile(context);
+              case DeviceScreenType.watch:
+                return buildWatch(context) ?? buildMobile(context);
+              default:
+                return buildMobile(context);
+            }
+          },
+        ),
+        buildLoading(context) ?? const ListSkeleton(),
+      ],
     );
   }
 }

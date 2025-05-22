@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_getx/gen/fonts.gen.dart';
 
 class CoreTheme {
   static ThemeData lightTheme = ThemeData(
@@ -11,6 +12,7 @@ class CoreTheme {
       style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white, backgroundColor: Colors.blue),
     ),
+    fontFamily: FontFamily.sFProDisplay,
     textTheme: const TextTheme(
         bodyLarge: TextStyle(color: Colors.black),
         bodyMedium: TextStyle(color: Colors.black87)),
@@ -26,6 +28,7 @@ class CoreTheme {
       style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white, backgroundColor: Colors.blueGrey),
     ),
+    fontFamily: FontFamily.sFProDisplay,
     textTheme: const TextTheme(
         bodyLarge: TextStyle(color: Colors.white),
         bodyMedium: TextStyle(color: Colors.white70)),

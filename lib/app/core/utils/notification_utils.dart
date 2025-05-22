@@ -27,15 +27,17 @@ class NotificationUtils {
     try {
       await FirebaseUtils.initFirebase(options: env.firebaseOptions);
       await FirebaseUtils.requestNotificationPermissions();
-      LocalNotificationUtils.initialize(
-        onSelectNotification: _handleSelectNotification,
-      );
 
       FirebaseUtils.setUpFCMMessage(
         onReceiverFCMToken: _handleTokenChange,
-        onReceiveMessage: handleReceiveMessage,
+        onReceiveMessage: _handleReceiveMessage,
+        onInitialMessage: _handleMessageOpenedApp,
         onMessageOpenedApp: _handleMessageOpenedApp,
-        onReceiveBackgroundMessage: onBackgroundMessage,
+        onReceiveBackgroundMessage: _onBackgroundMessage,
+      );
+
+      LocalNotificationUtils.initialize(
+        onSelectNotification: _handleSelectNotification,
       );
     } catch (e) {
       debugPrint('Failed to initialize notifications: $e');
@@ -53,7 +55,11 @@ class NotificationUtils {
   }
 
   /// Handles receiving a message and shows a local notification.
-  void handleReceiveMessage(RemoteMessage message) {
+  void _handleReceiveMessage(RemoteMessage message) {
+    if (message.notification == null) {
+      debugPrint('No notification payload found in the message.');
+      return;
+    }
     final localNotification = message.toLocalModel();
     final title = localNotification.notificationTitle;
     final content = localNotification.notificationContent;
@@ -63,6 +69,7 @@ class NotificationUtils {
       content: content,
       payload: payload,
     );
+    debugPrint('handleReceiveMessage - $message');
   }
 
   /// Handles selecting a notification and navigates to the appropriate page.
@@ -82,12 +89,13 @@ class NotificationUtils {
     debugPrint('message opened app, message= $message');
     _handleNavigateNotification(message.toLocalModel());
   }
-}
 
-/// Handle android firebase background message
-Future<void> onBackgroundMessage(RemoteMessage message) async {
-  debugPrint('onBackgroundMessage - $message');
-  if (message.notification == null) {
-    NotificationUtils().handleReceiveMessage(message);
+  /// Handle android firebase background message
+  @pragma('vm:entry-point')
+  Future<void> _onBackgroundMessage(RemoteMessage message) async {
+    debugPrint('onBackgroundMessage - $message');
+    if (message.notification == null) {
+      _handleReceiveMessage(message);
+    }
   }
 }

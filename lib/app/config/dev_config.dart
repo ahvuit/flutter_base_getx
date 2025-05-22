@@ -4,10 +4,13 @@ import 'package:flutter_base_getx/firebase_options_dev.dart' as dev;
 
 class DevConfig implements EnvConfig {
   @override
+  String get version => "1.5";
+
+  @override
   Flavor get flavor => Flavor.dev;
 
   @override
-  String get apiBaseUrl => "https://api.dev.example.com/";
+  String get apiBaseUrl => "https://omsuat.aws.fvs.vpbank.dev/omsMobileService1335/";
 
   @override
   String get appName => "Example App (Dev)";
@@ -17,10 +20,14 @@ class DevConfig implements EnvConfig {
       dev.DefaultFirebaseOptions.currentPlatform;
 
   @override
-  // TODO: implement sslFingerprints
   List<String> get sslFingerprints => [];
 
   @override
-  // TODO: implement excludedRateLimitEndpoints
   List<String> get excludedRateLimitEndpoints => [];
+
+  @override
+  bool get isCheckCertificatePinning => false;
+
+  @override
+  bool get isEnableProxy => false;
 }

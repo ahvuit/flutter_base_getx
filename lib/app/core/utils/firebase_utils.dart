@@ -35,6 +35,7 @@ class FirebaseUtils {
     required Function(String?) onReceiverFCMToken,
     Function(RemoteMessage message)? onReceiveMessage,
     Function(RemoteMessage message)? onMessageOpenedApp,
+    Function(RemoteMessage message)? onInitialMessage,
     Future<void> Function(RemoteMessage message)? onReceiveBackgroundMessage,
   }) async {
     try {
@@ -47,7 +48,15 @@ class FirebaseUtils {
       });
 
       FirebaseMessaging.onMessageOpenedApp.listen((message) async {
+        debugPrint('onMessageOpenedApp - ${message.notification}');
         onMessageOpenedApp?.call(message);
+      });
+
+      FirebaseMessaging.instance.getInitialMessage().then((message) {
+        if (message != null) {
+          debugPrint('onInitialMessage - ${message.notification}');
+          onInitialMessage?.call(message);
+        }
       });
 
       final token = await firebaseMessaging.getToken();
