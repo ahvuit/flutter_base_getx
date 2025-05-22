@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 
+import 'notification_utils.dart';
+
 class FirebaseUtils {
   static FirebaseMessaging get firebaseMessaging => FirebaseMessaging.instance;
   /// Initializes Firebase with the given [name] and [options].
@@ -35,6 +37,7 @@ class FirebaseUtils {
     required Function(String?) onReceiverFCMToken,
     Function(RemoteMessage message)? onReceiveMessage,
     Function(RemoteMessage message)? onMessageOpenedApp,
+    Function(RemoteMessage message)? onInitialMessage,
     Future<void> Function(RemoteMessage message)? onReceiveBackgroundMessage,
   }) async {
     try {
@@ -47,7 +50,15 @@ class FirebaseUtils {
       });
 
       FirebaseMessaging.onMessageOpenedApp.listen((message) async {
+        debugPrint('onMessageOpenedApp - ${message.notification}');
         onMessageOpenedApp?.call(message);
+      });
+
+      FirebaseMessaging.instance.getInitialMessage().then((message) {
+        if (message != null) {
+          debugPrint('onInitialMessage - ${message.notification}');
+          onInitialMessage?.call(message);
+        }
       });
 
       final token = await firebaseMessaging.getToken();

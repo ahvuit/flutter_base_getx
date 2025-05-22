@@ -6,7 +6,7 @@ import 'package:flutter_base_getx/app/di/injection.dart';
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+//import 'package:sentry_flutter/sentry_flutter.dart';
 
 @injectable
 class NetworkInfo extends GetxService {
@@ -94,7 +94,7 @@ class NetworkInfo extends GetxService {
   void _handleError(dynamic error) {
     logger.e('Connectivity check failed: $error');
     if (!kDebugMode) {
-      Sentry.captureException(error, stackTrace: StackTrace.current);
+      //Sentry.captureException(error, stackTrace: StackTrace.current);
     }
     _isConnected.value = false;
     _connectivityStream.add(ConnectivityResult.none);
