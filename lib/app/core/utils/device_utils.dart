@@ -7,6 +7,19 @@ import 'package:safe_device/safe_device.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 class DeviceUtils {
+  static Future<String> getUUID() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    String uuid = '';
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      uuid = androidInfo.serialNumber;
+    } else if (Platform.isIOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      uuid = iosInfo.identifierForVendor ?? '';
+    }
+    return uuid;
+  }
+
   static Future<String> getDeviceId() async {
     final logger = getIt<CoreLogger>();
     final deviceInfo = DeviceInfoPlugin();

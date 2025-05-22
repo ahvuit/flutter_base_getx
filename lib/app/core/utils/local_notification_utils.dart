@@ -32,6 +32,10 @@ class LocalNotificationUtils {
     RemoteMessage message,
   ) async {
     try {
+      if (message.notification == null) {
+        debugPrint('No notification payload found in the message.');
+        return;
+      }
       showNotification(
         title: message.notification?.title ?? '',
         content: message.notification?.body ?? '',

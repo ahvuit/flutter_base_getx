@@ -6,9 +6,9 @@ import 'package:flutter_base_getx/app/di/injection.dart';
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+//import 'package:sentry_flutter/sentry_flutter.dart';
 
-@injectable
+@singleton
 class NetworkInfo extends GetxService {
   final RxBool _isConnected = true.obs;
   final RxBool _isShowingDialog = false.obs;
@@ -67,7 +67,7 @@ class NetworkInfo extends GetxService {
 
   /// Shows a no internet connection dialog.
   void _showNoInternetDialog() {
-    Get.snackbar('no_internet', '',
+    Get.snackbar('no internet', '',
         snackPosition: SnackPosition.BOTTOM,
         backgroundGradient:
             LinearGradient(colors: [Colors.blueGrey, Colors.red]),
@@ -94,7 +94,7 @@ class NetworkInfo extends GetxService {
   void _handleError(dynamic error) {
     logger.e('Connectivity check failed: $error');
     if (!kDebugMode) {
-      Sentry.captureException(error, stackTrace: StackTrace.current);
+      //Sentry.captureException(error, stackTrace: StackTrace.current);
     }
     _isConnected.value = false;
     _connectivityStream.add(ConnectivityResult.none);

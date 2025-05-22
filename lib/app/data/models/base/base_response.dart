@@ -1,4 +1,4 @@
-import 'package:flutter_base_getx/app/core/error/core_error_code.dart';
+import 'package:flutter_base_getx/app/core/constants/core_constants.dart';
 import 'package:flutter_base_getx/app/data/models/base/core_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -8,23 +8,18 @@ part 'base_response.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
 class BaseResponse<T> extends CoreResponse {
-  T? data;
-  @JsonKey(name: "code")
-  dynamic code;
+  @JsonKey(name: "data")
+  final T? data;
   @JsonKey(name: "pagination")
   BasePagingResponse? pagination;
 
   BaseResponse({
     this.data,
-    this.code = CoreErrorCode.successCode,
     super.errorMessage = "",
+    super.message = "",
+    super.code = CoreConstants.successCode,
     this.pagination,
   });
-
-  @override
-  bool isSuccessCode() {
-    return (code == CoreErrorCode.successCode);
-  }
 
   @override
   @JsonKey(name: "errorMessage")

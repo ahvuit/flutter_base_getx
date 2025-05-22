@@ -11,10 +11,12 @@ class TokenCacheManager {
   static const _refreshToken = '_refreshToken';
 
   // Storage service for key-value operations
-  late final GetStorageService _storageBox;
+  final GetStorageService _storageBox;
 
   // Logger for debugging and error tracking
-  late final CoreLogger _logger;
+  final CoreLogger _logger;
+
+  TokenCacheManager(this._storageBox, this._logger);
 
   /// Saves the access token to storage.
   /// [token] The access token to save. If null, an empty string is saved.

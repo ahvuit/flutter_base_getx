@@ -29,4 +29,17 @@ class PermissionUtils {
     final status = await permission.status;
     return status.isGranted;
   }
+
+  static Future<Map<Permission, PermissionStatus>> requestMultiplePermissions(
+      List<Permission> permissions) async {
+    final statuses = await permissions.request();
+    statuses.forEach((permission, status) {
+      if (status.isGranted) {
+        getIt<CoreLogger>().i('${permission.toString()} permission granted');
+      } else {
+        getIt<CoreLogger>().w('${permission.toString()} permission denied');
+      }
+    });
+    return statuses;
+  }
 }

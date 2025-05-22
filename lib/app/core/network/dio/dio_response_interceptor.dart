@@ -3,10 +3,14 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_base_getx/app/core/error/core_error_code.dart';
+import 'package:flutter_base_getx/app/core/logger/core_logger.dart';
 import 'package:flutter_base_getx/app/core/network/dio/dio_error_interceptor.dart';
 import 'package:flutter_base_getx/app/data/models/base/base_response.dart';
+import 'package:flutter_base_getx/app/di/injection.dart';
 
 class DioResponseInterceptor extends InterceptorsWrapper {
+  final CoreLogger _logger = getIt<CoreLogger>();
+
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     try {
@@ -14,7 +18,8 @@ class DioResponseInterceptor extends InterceptorsWrapper {
         response.data as Map<String, dynamic>,
         (json) {},
       );
-      log('DioResponseInterceptor code: ${baseResponse.code}');
+      _logger.i('${response.statusCode}: ${response.requestOptions.uri}');
+      _logger.i(response.data);
 
       // Usecase: Respone code with SYS0009, ACC3001
       // Will same with case 401 for US change username
@@ -32,7 +37,7 @@ class DioResponseInterceptor extends InterceptorsWrapper {
         return;
       }
     } catch (e) {
-      log(e.toString());
+      _logger.i(e);
     }
 
     super.onResponse(response, handler);

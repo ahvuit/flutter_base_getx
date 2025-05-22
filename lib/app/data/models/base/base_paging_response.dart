@@ -5,19 +5,19 @@ part 'base_paging_response.g.dart';
 @JsonSerializable()
 class BasePagingResponse extends Object {
 
-  @JsonKey(name: "current_page")
+  @JsonKey(name: "currentPage")
   int? currentPage;
 
-  @JsonKey(name: "last_page")
+  @JsonKey(name: "lastPage")
   int? lastPage;
 
-  @JsonKey(name: "per_page")
+  @JsonKey(name: "perPage")
   int? perPage;
 
   @JsonKey(name: "totalPages")
   int? totalPages;
 
-  @JsonKey(name: "total_rows")
+  @JsonKey(name: "totalRows")
   int? totalRows;
 
   BasePagingResponse({
