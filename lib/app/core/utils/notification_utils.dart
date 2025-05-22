@@ -27,15 +27,16 @@ class NotificationUtils {
     try {
       await FirebaseUtils.initFirebase(options: env.firebaseOptions);
       await FirebaseUtils.requestNotificationPermissions();
-      LocalNotificationUtils.initialize(
-        onSelectNotification: _handleSelectNotification,
-      );
 
       FirebaseUtils.setUpFCMMessage(
         onReceiverFCMToken: _handleTokenChange,
         onReceiveMessage: handleReceiveMessage,
         onMessageOpenedApp: _handleMessageOpenedApp,
         onReceiveBackgroundMessage: onBackgroundMessage,
+      );
+
+      LocalNotificationUtils.initialize(
+        onSelectNotification: _handleSelectNotification,
       );
     } catch (e) {
       debugPrint('Failed to initialize notifications: $e');
@@ -63,6 +64,7 @@ class NotificationUtils {
       content: content,
       payload: payload,
     );
+    debugPrint('handleReceiveMessage - $message');
   }
 
   /// Handles selecting a notification and navigates to the appropriate page.

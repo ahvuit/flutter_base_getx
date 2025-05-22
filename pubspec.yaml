@@ -19,6 +19,7 @@ dependencies:
 
   # Dio for network requests
   dio: ^5.8.0
+  dio_cache_interceptor: ^3.5.1
   retrofit: ^4.4.2
 
   # Curl logger for Dio
@@ -85,7 +86,7 @@ dependencies:
   flutter_native_splash: ^2.4.1
 
   # Jailbreak detection
-  flutter_jailbreak_detection: ^1.10.0
+  #flutter_jailbreak_detection: ^1.10.0
 
   # Reactive streams
   rxdart: ^0.28.0
@@ -118,8 +119,6 @@ dependencies:
 
   # Safe device
   safe_device: ^1.2.0
-
-  dio_cache_interceptor: ^3.5.1
 
 dev_dependencies:
   flutter_test:

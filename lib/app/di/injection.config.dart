@@ -15,10 +15,15 @@ import 'package:flutter_base_getx/app/core/auth/auth_manager.dart' as _i591;
 import 'package:flutter_base_getx/app/core/logger/core_logger.dart' as _i762;
 import 'package:flutter_base_getx/app/core/network/dio/dio_config.dart' as _i24;
 import 'package:flutter_base_getx/app/core/network/network_info.dart' as _i24;
+import 'package:flutter_base_getx/app/core/service/language_service.dart'
+    as _i474;
+import 'package:flutter_base_getx/app/core/service/theme_service.dart' as _i753;
 import 'package:flutter_base_getx/app/core/storage/core/get_storage_service.dart'
     as _i100;
 import 'package:flutter_base_getx/app/core/storage/core/token_manager.dart'
     as _i274;
+import 'package:flutter_base_getx/app/core/storage/storage_manager.dart'
+    as _i899;
 import 'package:flutter_base_getx/app/data/datasources/remote/example_remote_datasource.dart'
     as _i463;
 import 'package:flutter_base_getx/app/data/repositories/example_repository.dart'
@@ -45,6 +50,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i591.AuthManager>(() => _i591.AuthManager());
     gh.singleton<_i100.GetStorageService>(() => _i100.GetStorageService());
     gh.singleton<_i274.TokenCacheManager>(() => _i274.TokenCacheManager());
+    gh.singleton<_i899.StorageManager>(() => _i899.StorageManager());
+    gh.singleton<_i753.ThemeManager>(() => _i753.ThemeManager());
+    gh.singleton<_i474.LanguageService>(() => _i474.LanguageService());
     gh.singleton<_i24.DioConfig>(() => _i24.DioConfig(gh<_i591.AuthManager>()));
     gh.singleton<_i361.Dio>(() => appModule.provideDio(gh<_i24.DioConfig>()));
     gh.factory<_i699.ExampleApiService>(

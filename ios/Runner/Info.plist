@@ -33,7 +33,6 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
-		<string>voip</string>
 		<string>fetch</string>
 		<string>processing</string>
 		<string>audio</string>
